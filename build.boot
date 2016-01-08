@@ -12,10 +12,10 @@
 (bootlaces! +version+)
 
 (task-options!
-  pom {:project     'adzerk/boot-reload
+  pom {:project     'boot.task/boot-reload
        :version     +version+
        :description "Boot task to automatically reload page resources in the browser."
-       :url         "https://github.com/adzerk/boot-reload"
-       :scm         {:url "https://github.com/adzerk/boot-reload"}
+       :url         "https://github.com/gfZeng/boot-reload"
+       :scm         {:url "https://github.com/gfZeng/boot-reload"}
        :license     {"Eclipse Public License"
                      "http://www.eclipse.org/legal/epl-v10.html"}})

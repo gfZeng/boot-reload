@@ -92,6 +92,7 @@
    w ws-host WSADDR  str  "The (optional) websocket host address to pass to clients."
    j on-jsload SYM   sym  "The (optional) callback to call when JS files are reloaded."
    a asset-path PATH str  "The (optional) asset-path. This is removed from the start of reloaded urls."
+   _ satisfy-path FN code  "The (optional) satisfy-path. (satisfy-path path) => real-web-path"
    s secure          bool "Flag to indicate whether the client should connect via wss. Defaults to false."
    o open-file COMMAND str "The (optional) command to run when warning or exception is clicked on HUD. Passed to format."]
 
@@ -133,6 +134,7 @@
             ; Only send changed files when there are no warnings
             ; As prev is updated only when changes are sent, changes are queued untill they can be sent
             (when (empty? warnings)
-              (send-changed! @pod asset-path (changed @prev fileset static-files))
+              (send-changed! @pod asset-path (map (or satisfy-path identity)
+                                                  (changed @prev fileset static-files)))
               (reset! prev fileset))
             fileset))))))
